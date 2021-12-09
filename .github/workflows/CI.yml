@@ -1,8 +1,8 @@
 name: CI for Remote SimpCity
 
 on:
-  pull_request:
-    branches: [main]
+  push:
+    branches: [master]
 
 jobs:
   build:
