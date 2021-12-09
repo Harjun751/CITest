@@ -1,6 +1,6 @@
 import pickle
 
-# hi
+# hi2
 
 
 def init_game():
