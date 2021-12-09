@@ -1,5 +1,7 @@
 import pickle
 
+# hi
+
 
 def init_game():
     game_board = [
