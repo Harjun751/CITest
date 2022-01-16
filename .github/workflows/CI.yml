@@ -38,6 +38,7 @@ jobs:
         uses: ad-m/github-push-action@master
         with:
             github_token: ${{ secrets.GITHUB_TOKEN }}
+            force: true
             branch: ${{ github.head_ref }}
 
       - name: Label the PR size
