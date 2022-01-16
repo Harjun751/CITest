@@ -27,10 +27,10 @@ jobs:
           git pull origin ${{ github.head_ref }} --rebase
 
       - name: Format using black
-        uses: riskstaa/action-black@v1
+        uses: rickstaa/action-black@v1
         id: action_black
         with:
-          black_args:"."
+          black_args: "."
       
       - name: Push formatted changes
         if: steps.action_black.outputs.is_formatted == 'true'
