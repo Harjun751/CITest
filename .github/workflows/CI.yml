@@ -15,7 +15,7 @@ jobs:
           python-version: 3.8
 
       - name: Install dependencies
-        run: |
+        run: |za
           python -m pip install --upgrade pip
           pip install pytest pytest-cov
           pip install pyfakefs
@@ -27,12 +27,12 @@ jobs:
             black_args: "."
       - name: Commit black changes
         if: steps.action_black.outputs.is_formatted == 'true'
-        - uses: actions/checkout@v2
-        - run: | 
-            git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git config --local user.name "github-actions[bot]"
-            git commit -m "Add changes" -a
-            git push 
+        uses: actions/checkout@v2
+        run: | 
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git commit -m "Add changes" -a
+          git push 
       - name: Label the PR size
         uses: coverwallet/pr-labeler@v1.2.1
         with:
