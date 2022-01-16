@@ -25,17 +25,15 @@ jobs:
         id: action_black
         with:
             black_args: "."
-      - name: Create Pull Request 
         if: steps.action_black.outputs.is_formatted == 'true'
-        uses: peter-evans/create-pull-request@v3
+        run: | 
+            git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git config --local user.name "github-actions[bot]"
+            git commit -m "Add changes" -a
+        uses: ad-m/github-push-action@master
         with:
-            token: ${{ secrets.GITHUB_TOKEN }}
-            title: "Format Python code with psf/black push"
-            commit-message: ":art: Format Python code with psf/black"
-            body: |
-                Format python code using black
-            base: ${{ github.ref }}
-            branch: actions/black
+            github_token: ${{ secrets.GITHUB_TOKEN }}
+            branch: ${{ github.ref }}
 
       - name: Label the PR size
         uses: coverwallet/pr-labeler@v1.2.1
