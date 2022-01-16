@@ -33,6 +33,7 @@ jobs:
             git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
             git config --local user.name "github-actions[bot]"
             git commit -m "Add changes" -a
+            git pull
             git push origin HEAD:"${{ github.head_ref }}"
       - name: Label the PR size
         uses: coverwallet/pr-labeler@v1.2.1
