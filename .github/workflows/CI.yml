@@ -13,7 +13,7 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: 3.8
-          ref: refs/heads/${{ github_head_ref }}
+          ref: refs/heads/${{ github.head_ref }}
 
       - name: Install dependencies
         run: |
