@@ -18,16 +18,26 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install pytest pytest-cov black
+          pip install pytest pytest-cov 
 
-      - name: Commit black changes
+      - name: Config git
         run: | 
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git pull origin ${{ github.head_ref }} --rebase
-          python3 -m black .
-          git commit -m "Formatted code" -a
-          git push origin HEAD:${{ github.head_ref }} 
+
+      - name: Format using black
+        uses: riskstaa/action-black@v1
+        id: action_black
+        with:
+          black_args:"."
+      
+      - name: Push formatted changes
+        if: steps.action_black.outputs.is_formatted == 'true'
+        run: |
+            git commit -am "Formatted code"
+            git push origin HEAD:${{ github.head_ref }}
+
       - name: Label the PR size
         uses: coverwallet/pr-labeler@v1.2.1
         with:
