@@ -35,12 +35,9 @@ jobs:
             git commit -m "Add changes" -a
       - name: Push changes
         if: steps.action_black.outputs.is_formatted == 'true'
-        uses: ad-m/github-push-action@master
-        with:
-            github_token: ${{ secrets.GITHUB_TOKEN }}
-            force: true
-            branch: ${{ github.head_ref }}
-
+        run: |
+            git pull --rebase origin "${{ github.head_ref }}"
+            git push origin "${{ github.head_ref }}"
       - name: Label the PR size
         uses: coverwallet/pr-labeler@v1.2.1
         with:
