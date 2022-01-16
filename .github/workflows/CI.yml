@@ -18,6 +18,24 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install pytest pytest-cov
+          pip install pyfakefs
+
+      - name: Format code with python black
+        uses: rickstaa/action-black@v1
+        id: action_black
+        with:
+            black_args: "."
+      - name: Commit format changes
+        run: |
+            git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git config --local user.name "github-actions[bot]"
+            git commit -m "Add changes" -a
+      - name: Push format changes
+        if: steps.action_black.outputs.is_formatted == 'true'
+        uses: ad-m/github-push-action@master
+        with:
+            github_token: ${{ secrets.GITHUB_TOKEN }}
+            branch: ${{ github.ref }}            
 
       - name: Label the PR size
         uses: coverwallet/pr-labeler@v1.2.1
