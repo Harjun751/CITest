@@ -36,7 +36,6 @@ jobs:
       - name: Push changes
         if: steps.action_black.outputs.is_formatted == 'true'
         run: |
-            git pull --rebase origin "${{ github.head_ref }}"
             git push origin "${{ github.head_ref }}"
       - name: Label the PR size
         uses: coverwallet/pr-labeler@v1.2.1
