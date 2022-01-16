@@ -24,10 +24,10 @@ jobs:
         run: | 
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git pull origin HEAD:${{ github.head_ref }} --rebase
+          git pull origin ${{ github.head_ref }} --rebase
           python3 -m black .
           git commit -m "Formatted code" -a
-          git push origin HEAD:${{ github.head_ref }} 
+          git push origin ${{ github.head_ref }} 
       - name: Label the PR size
         uses: coverwallet/pr-labeler@v1.2.1
         with:
