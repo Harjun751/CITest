@@ -25,12 +25,14 @@ jobs:
         id: action_black
         with:
             black_args: "."
-      - name: Commit and push black changes
+      - name: Commit black changes
         if: steps.action_black.outputs.is_formatted == 'true'
         run: | 
             git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
             git config --local user.name "github-actions[bot]"
             git commit -m "Add changes" -a
+      - name: Push changes
+        if: steps.action_black.outputs.is_formatted == 'true'
         uses: ad-m/github-push-action@master
         with:
             github_token: ${{ secrets.GITHUB_TOKEN }}
