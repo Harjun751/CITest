@@ -8,6 +8,11 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@0.9.1
+        with:
+          access_token: ${{ github.token }}
+
       - uses: actions/checkout@v2
       - name: Setup Python 3.8 test
         uses: actions/setup-python@v2
@@ -15,7 +20,7 @@ jobs:
           python-version: 3.8
           ref: ${{ github.event.pull_request.head.sha }}
           fetch-depth: 0
-          token: ${{ secrets.push_PAT }}
+          token: ${{ secrets.PUSH_PAT }}
 
       - name: Config git
         run: | 
