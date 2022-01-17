@@ -14,13 +14,16 @@ jobs:
           access_token: ${{ github.token }}
 
       - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+          repository: Harjun751/CITest
+          token: ${{ secrets.PUSH_PAT }}
+
       - name: Setup Python 3.8 test
         uses: actions/setup-python@v2
         with:
           python-version: 3.8
-          ref: ${{ github.event.pull_request.head.sha }}
-          fetch-depth: 0
-          token: ${{ secrets.PUSH_PAT }}
 
       - name: Config git
         run: | 
