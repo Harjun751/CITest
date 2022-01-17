@@ -6,20 +6,15 @@ import pickle
 def init_game():
     game_board = [
         # e.g. ['SHP','FAC','BCH','HWY']
-        ['', '', '', ''],
-        ['', '', '', ''],
-        ['', '', '', ''],
-        ['', '', '', ''],
+        ["", "", "", ""],
+        ["", "", "", ""],
+        ["", "", "", ""],
+        ["", "", "", ""],
     ]
     # Building name:count of buildings
-    building_pool = {
-        "HSE": 8,
-        "FAC": 8,
-        "SHP": 8,
-        "HWY": 8,
-        "BCH": 8
-    }
+    building_pool = {"HSE": 8, "FAC": 8, "SHP": 8, "HWY": 8, "BCH": 8}
     return game_board, building_pool
+
 
 # UI for in-game menu
 
@@ -85,6 +80,7 @@ def save_game(board, pool, file):
     pickle_out.close()
     return content
 
+
 # Function to load game data
 
 
@@ -115,7 +111,7 @@ def main():
         # Ensure inputted option is valid
         try:
             option = int(option)
-            if (option != 1 and option != 2 and option != 0):
+            if option != 1 and option != 2 and option != 0:
                 raise ValueError
         except ValueError:
             # print red warning using ANSI escape codes
@@ -123,7 +119,7 @@ def main():
             continue
 
         if option == 1:
-            if (game_board == None or building_pool == None):
+            if game_board == None or building_pool == None:
                 # Get blank game board and default building pool
                 game_board, building_pool = init_game()
             # Start game menu
@@ -139,4 +135,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
