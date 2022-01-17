@@ -8,11 +8,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Cancel Previous Runs
-        uses: styfle/cancel-workflow-action@0.9.1
-        with:
-          access_token: ${{ github.token }}
-
       - uses: actions/checkout@v2
         with:
           ref: ${{ github.event.pull_request.head.sha }}
@@ -25,12 +20,6 @@ jobs:
         with:
           python-version: 3.8
 
-      - name: Config git
-        run: | 
-          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
-          git pull origin ${{ github.head_ref }} --rebase
-
       - name: Format using black
         uses: rickstaa/action-black@v1
         id: action_black
@@ -40,12 +29,10 @@ jobs:
       - name: Push formatted changes
         if: steps.action_black.outputs.is_formatted == 'true'
         run: |
+            git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git config --local user.name "github-actions[bot]"
             git commit -am "Formatted code"
-            git push origin HEAD:${{ github.head_ref }}
-
-      - name: Cancel current workflow if any change
-        if: steps.action_black_outputs.is_formatted == 'true'
-        uses: andymckay/cancel-action@0.2 
+            git push origin 
 
       - name: Install dependencies
         run: |
