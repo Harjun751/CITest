@@ -15,7 +15,7 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.sha }}
           fetch-depth: 0
-          repository: notyumin/SimpCity
+          repository: Harjun751/CITest
           token: ${{ secrets.PUSH_PAT }}
 
       - name: Setup Python 3.8 test
