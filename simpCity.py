@@ -46,7 +46,8 @@ def game_menu(game_board, building_pool):
             return game_menu(game_board, building_pool)
         elif choice == 3:
             # code to see remaining buildings
-            return game_menu(game_board, building_pool)
+            return game_menu(game_board,
+            building_pool)
         elif choice == 4:
             # code to see current score
             return game_menu(game_board, building_pool)
