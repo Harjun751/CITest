@@ -27,42 +27,42 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install pytest pytest-cov colorama pyfakefs tabulate 
-      - name: Label PR size
-        if: github.event_name == 'pull_request'
-        uses: coverwallet/pr-labeler@v1.2.1
-        with:
-          xs_max_size: "10"
-          s_max_size: "100"
-          m_max_size: "500"
-          l_max_size: "1000"
-          exclude_files: ".txt"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # - name: Label PR size
+      #   if: github.event_name == 'pull_request'
+      #   uses: coverwallet/pr-labeler@v1.2.1
+      #   with:
+      #     xs_max_size: "10"
+      #     s_max_size: "100"
+      #     m_max_size: "500"
+      #     l_max_size: "1000"
+      #     exclude_files: ".txt"
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Begin Pytest
-        run: |
-          pytest --cov -v --junitxml=report.xml --cov-report=xml
-      - if: ${{failure()}}
-        name: Create Issues
-        uses: nashmaniac/create-issue-action@v1.1
-        with:
-          title: Build Failed
-          token: ${{secrets.GITHUB_TOKEN}}
-          assignees: ${{github.actor}}
-          labels: workflow-failed
-          body: Workflow failed for commit ${{github.sha}} @ ${{github.ref}}
+      # - name: Begin Pytest
+      #   run: |
+      #     pytest --cov -v --junitxml=report.xml --cov-report=xml
+      # - if: ${{failure()}}
+      #   name: Create Issues
+      #   uses: nashmaniac/create-issue-action@v1.1
+      #   with:
+      #     title: Build Failed
+      #     token: ${{secrets.GITHUB_TOKEN}}
+      #     assignees: ${{github.actor}}
+      #     labels: workflow-failed
+      #     body: Workflow failed for commit ${{github.sha}} @ ${{github.ref}}
 
-      - name: Code Coverage
-        uses: codecov/codecov-action@v2
-        with:
-          files: ./coverage.xml
+      # - name: Code Coverage
+      #   uses: codecov/codecov-action@v2
+      #   with:
+      #     files: ./coverage.xml
 
-      - name: Publish Unit Test Results
-        uses: EnricoMi/publish-unit-test-result-action@v1.24
-        if: always()
-        with:
-          github_token: ${{secrets.GITHUB_TOKEN}}
-          files: report.xml
+      # - name: Publish Unit Test Results
+      #   uses: EnricoMi/publish-unit-test-result-action@v1.24
+      #   if: always()
+      #   with:
+      #     github_token: ${{secrets.GITHUB_TOKEN}}
+      #     files: report.xml
 
       - name: Format using black
         uses: rickstaa/action-black@v1
