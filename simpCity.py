@@ -21,12 +21,15 @@ def game_menu(game_board, building_pool):
         buildings = randomise_building(building_pool)
         # Print options for turn
         print("1. Build a " + buildings[0])
-        print("2. Build a " + buildings[1])
+        print("2. Build a " + 
+        buildings[1])
         print("3. See remaining buildings")
+
         print("4. See current score\n")
         print("5. Save game")
         print("0. Exit to main menu")
         print("Your choice?")
+
         option = input()
 
         # Ensure inputted option is valid
