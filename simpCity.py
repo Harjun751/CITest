@@ -39,6 +39,7 @@ def game_menu(game_board, building_pool):
                 option != 1
                 and option != 2
                 and option != 3
+                
                 and option != 4
                 and option != 5
                 and option != 0
